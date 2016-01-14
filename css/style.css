@@ -42,6 +42,7 @@
 .posts li.error::before {background: #FF4136;}
 .posts li.warning {border-color: #FF851B;}
 .posts li.warning::before {background: #FF851B;}
+.posts li.resolve {border-color: #2ECC40;}
 .posts li.resolve::before {background: #2ECC40;}
 .posts li span,
 .about,
