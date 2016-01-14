@@ -1,0 +1,35 @@
+---
+layout: default
+title: Narro Status
+---
+<meta name="description" content="{{ site.description }}" />
+<h1 class="site-title">
+    <a href="/" title="{{ site.title }}">{{ site.title }}</a>
+</h1>
+<a title="Currently" class="current" href="/"></a>
+<ul id="posts"  class="posts">
+  {% for post in site.posts %}
+    <li>
+        <span>{{ post.date | date_to_string }}</span> <h4><a href="{{ post.url }}">{{ post.title }}</a></h4>
+    </li>
+  {% endfor %}
+</ul>
+<script>
+(function() {
+    var posts = document.querySelectorAll('.posts li'),
+        base = 35,
+        n = new Date(),
+        o = new Date(posts[0].querySelector('span').textContent),
+        diff = (n.getTime() - o.getTime()) / (1000 * 60 * 60);
+
+    posts[0].style.paddingTop = (base + diff) + 'px';
+    for (var i = 0; i < posts.length; i++) {
+        n = new Date(posts[i].querySelector('span').textContent);
+        o = posts[i + 1] ? new Date(posts[i + 1].querySelector('span').textContent) : null;
+        if (o) {
+            diff = (n.getTime() - o.getTime()) / (1000 * 60 * 60);
+            posts[i + 1].style.paddingTop = (base + diff) + 'px';
+        }
+    }
+})();
+</script>

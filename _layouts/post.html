@@ -1,0 +1,35 @@
+---
+layout: default
+---
+
+<meta name="twitter:card"       content="summary" />
+<meta name="twitter:site"       content="@narroapp" />
+<meta name="twitter:title"      content="{{ page.title }}" />
+<meta name="twitter:description"content="{{ page.date | date_to_string }}" />
+<meta name="twitter:image"      content="https://status.narro.co/favicon.png" />
+<meta name="twitter:url"        content="{{ page.url }}" />
+<meta property="og:title"       content="{{ page.title }}" />
+<meta property="og:type"        content="article" />
+<meta property="og:url"         content="{{ page.url }}" />
+<meta property="og:image"       content="https://status.narro.co/favicon.png" />
+<meta property="og:site_name"   content="Narro Status" />
+
+<article itemscope itemtype="http://schema.org/BlogPosting">
+    <meta itemprop="author" content="{{ site.author }}" />
+    <h2 class="site-title">
+        <a rel="home" href="/" title="{{ site.title }}">{{ site.title }}</a>
+    </h2>
+    <p class="meta">
+        <span itemprop="datePublished">
+            {{ page.date | date_to_string }}
+        </span>
+    </p>
+    <h1 class="">
+        <a itemprop="url" href="{{ page.url }}">
+            {{ page.title }}
+        </a>
+    </h1>
+    <div class="content" itemprop="articleBody">
+        {{ content }}
+    </div>
+</article>

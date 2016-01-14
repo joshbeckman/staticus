@@ -1,2 +1,2 @@
-# staticus
+# Staticus
 A static status page.
