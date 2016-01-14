@@ -20,7 +20,7 @@
 .posts li {
     padding-top: 2em;
     margin: 0em 0;
-    border-left: 1px dashed #897EB4;
+    border-left: 1px solid #897EB4;
     padding-left: 0.5em;
     padding-bottom: 0.5em;
     position: relative
@@ -33,8 +33,16 @@
     background: #897EB4;
     position: absolute;
     left: -4.5px;
-    bottom: 37px
+    bottom: 0;
 }
+.posts li h4 {
+    margin: 2em 0 -1em 0;
+}
+.posts li.error {border-color: #FF4136;}
+.posts li.error::before {background: #FF4136;}
+.posts li.warning {border-color: #FF851B;}
+.posts li.warning::before {background: #FF851B;}
+.posts li.resolve::before {background: #2ECC40;}
 .posts li span,
 .about,
 .meta {
@@ -51,7 +59,8 @@
     position: relative;
     left: -66px;
     font-family: monospace;
-    letter-spacing: 1px
+    letter-spacing: 1px;
+    color: #897EB4;
 }
 .markdown-body .site-title {
     text-align: center;
@@ -59,6 +68,7 @@
     font-size: 1.25em;
     letter-spacing: normal;
     border-bottom: none;
+    margin-bottom: 3em;
 }
 .markdown-body .site-title a {
     color: white !important;
@@ -191,44 +201,6 @@
 }
 .markdown-body .anchor:focus {
     outline: 0
-}
-.markdown-body h1,
-.markdown-body h2,
-.markdown-body h3,
-.markdown-body h4,
-.markdown-body h5,
-.markdown-body h6 {
-    font-size: 1.2em;
-    position: relative;
-    line-height: 1.4
-}
-.markdown-body h1 .octicon-link,
-.markdown-body h2 .octicon-link,
-.markdown-body h3 .octicon-link,
-.markdown-body h4 .octicon-link,
-.markdown-body h5 .octicon-link,
-.markdown-body h6 .octicon-link {
-    display: none;
-    color: #000;
-    vertical-align: middle
-}
-.markdown-body h1:hover .anchor,
-.markdown-body h2:hover .anchor,
-.markdown-body h3:hover .anchor,
-.markdown-body h4:hover .anchor,
-.markdown-body h5:hover .anchor,
-.markdown-body h6:hover .anchor {
-    padding-left: 8px;
-    margin-left: -30px;
-    text-decoration: none
-}
-.markdown-body h1:hover .anchor .octicon-link,
-.markdown-body h2:hover .anchor .octicon-link,
-.markdown-body h3:hover .anchor .octicon-link,
-.markdown-body h4:hover .anchor .octicon-link,
-.markdown-body h5:hover .anchor .octicon-link,
-.markdown-body h6:hover .anchor .octicon-link {
-    display: inline-block
 }
 .markdown-body h1 {
     padding-bottom: .25em;
@@ -410,18 +382,35 @@
     border-color: #4183c4
 }
 a.current {
-    height: 10px;
-    width: 10px;
+    height: 20px;
+    width: 20px;
     border-radius: 50%;
     display: block;
-    margin-left: -4.5px;
-    border: 2px solid #2ECC40;
-    background-color: #2ECC40;
+    margin-left: -9.5px;
+    border: 3.5px solid #2ECC40;
     animation: beat 1.4s infinite;
     transform-origin: center;
     z-index: 100;
-    position: relative
+    position: relative;
 }
+a.current.error {border-color: #FF4136;}
+.current-text.error{color: #FF4136;}
+a.current.warning {border-color: #FF851B;}
+.current-text.warning {color: #FF851B;}
+.current-text {
+    position: absolute;
+    margin-top: -1.5em;
+    margin-left: 1.5em;
+    color: #2ECC40;
+}
+img.logo {
+    display: block;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 10px;
+    padding: 0 10px;
+}
+.topright {text-align:right}
 @keyframes beat {
     0% {
         transform: scale(1);

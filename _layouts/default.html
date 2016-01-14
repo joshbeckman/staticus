@@ -15,16 +15,21 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
 </head>
 <body class="markdown-body">
-    <div class="topleft">
-        <small>
-            <a href="/rss.xml"
-                title="Subscribe to the RSS feed"
-                rel="alternate">RSS</a>
-        </small>
+    <div class="top">
+        <div class="topright">
+            <small>
+                <a href="/rss.xml"
+                    title="Subscribe to the RSS feed"
+                    rel="alternate">RSS</a>
+            </small>
+        </div>
+        <img class="logo"
+            alt="{{ site.title }}"
+            src="/logo.svg"
+            width=150 height=50 />
     </div>
 
     {{ content }}
 
-    <script type="text/javascript" src="/js/script.js" async></script>
 </body>
 </html>

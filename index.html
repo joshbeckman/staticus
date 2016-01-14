@@ -4,12 +4,15 @@ title: Narro Status
 ---
 <meta name="description" content="{{ site.description }}" />
 <h1 class="site-title">
-    <a href="/" title="{{ site.title }}">{{ site.title }}</a>
+    <a href="/" title="{{ site.title }}">Status</a>
 </h1>
 <a title="Currently" class="current" href="/"></a>
+<small class="current-text {{ site.posts.first.action }}">
+    {{ site.posts.first.system }}
+</small>
 <ul id="posts"  class="posts">
     {% for post in site.posts %}
-    <li>
+    <li class="{{ post.action }}">
         <span>{{ post.date | date_to_string }}</span> <h4><a href="{{ post.url }}">{{ post.title }}</a></h4>
     </li>
     {% endfor %}
@@ -17,12 +20,14 @@ title: Narro Status
 <script>
 (function() {
     var posts = document.querySelectorAll('.posts li'),
+        currently = document.querySelector('.current'),
         base = 35,
         n = new Date(),
         o = new Date(posts[0].querySelector('span').textContent),
         diff = (n.getTime() - o.getTime()) / (1000 * 60 * 60);
 
     posts[0].style.paddingTop = (base + diff) + 'px';
+    currently.className += ' ' + posts[0].className;
     for (var i = 0; i < posts.length; i++) {
         n = new Date(posts[i].querySelector('span').textContent);
         o = posts[i + 1] ? new Date(posts[i + 1].querySelector('span').textContent) : null;
