@@ -27,3 +27,7 @@ system: Systems are down
 action: error
 ---
 ```
+
+### Preview
+
+![Screenshot](https://github.com/NarroApp/staticus/blob/master/img/screenshot.png)
