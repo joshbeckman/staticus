@@ -8,11 +8,11 @@ title: Narro Status
 </h1>
 <a title="Currently" class="current" href="/"></a>
 <ul id="posts"  class="posts">
-  {% for post in site.posts %}
+    {% for post in site.posts %}
     <li>
         <span>{{ post.date | date_to_string }}</span> <h4><a href="{{ post.url }}">{{ post.title }}</a></h4>
     </li>
-  {% endfor %}
+    {% endfor %}
 </ul>
 <script>
 (function() {
