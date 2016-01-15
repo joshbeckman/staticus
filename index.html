@@ -22,18 +22,21 @@ title: Narro Status
     var posts = document.querySelectorAll('.posts li'),
         currently = document.querySelector('.current'),
         base = 35,
+        first = posts[0],
         n = new Date(),
         o = new Date(posts[0].querySelector('span').textContent),
-        diff = (n.getTime() - o.getTime()) / (1000 * 60 * 60);
+        diff = (n.getTime() - o.getTime()) / (1000 * 60 * 60),
+        i, j;
 
-    posts[0].style.paddingTop = (base + diff) + 'px';
-    currently.className += ' ' + posts[0].className;
-    for (var i = 0; i < posts.length; i++) {
+    first.style.paddingTop = (base + diff) + 'px';
+    currently.className += ' ' + first.className;
+    for (i = 0; i < posts.length; i++) {
+        j = i + 1;
         n = new Date(posts[i].querySelector('span').textContent);
-        o = posts[i + 1] ? new Date(posts[i + 1].querySelector('span').textContent) : null;
+        o = posts[j] ? new Date(posts[j].querySelector('span').textContent) : null;
         if (o) {
             diff = (n.getTime() - o.getTime()) / (1000 * 60 * 60);
-            posts[i + 1].style.paddingTop = (base + diff) + 'px';
+            posts[j].style.paddingTop = (base + diff) + 'px';
         }
     }
 })();
