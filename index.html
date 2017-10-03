@@ -4,21 +4,73 @@ title: Narro Status
 ---
 <meta name="description" content="{{ site.description }}" />
 <h1 class="site-title">
-    <a href="/" title="{{ site.title }}">Status</a>
+    <a href="/" title="{{ site.title }}">
+        {{ site.title }}
+    </a>
 </h1>
-<a title="Currently" class="current" href="/"></a>
-<small class="current-text {{ site.posts.first.action }}">
+<p class="current-text {{ site.posts.first.action }}">
     {{ site.posts.first.system }}
-</small>
+</p>
+
+{% for tag in site.data.tags %}
+{% if tag.key %}
+<div class="index-system">
+    <div class="index-heading">
+        <h3>
+            {{ tag.name }}
+        </h3>
+    </div>
+    <hr/>
+    {% for post in site.tags[tag.slug] limit:1 %}
+        <p class="{{ post.action }}">
+            {% if post.action contains 'incident' %}
+                <a href="{{ post.url }}">
+                    {{ post.title }}
+                </a>
+            {% else %}
+                <span class="resolved">
+                    No known issues at this time.
+                </span>
+            {% endif %}
+        </p>
+    {% endfor %}
+</div>
+{% endif %}
+{% endfor %}
+
+<div class="index-heading">
+    <h3>
+        Uptime Last 30 Days
+    </h3>
+</div>
+<hr/>
+<div class="uptime">
+</div>
+
+<div class="index-heading">
+    <h3>
+        Past Incidents
+    </h3>
+    <a href="/archive">
+        View Archive
+    </a>
+</div>
+<hr/>
 <ul id="posts"  class="posts">
-    {% for post in site.posts %}
+    {% for post in site.posts limit:3 %}
     <li class="{{ post.action }}">
-        <span>{{ post.date | date_to_string }}</span> <h4><a href="{{ post.url }}">{{ post.title }}</a></h4>
+        <h4>
+            <a href="{{ post.url }}">
+                {{ post.title }}
+            </a>
+        </h4>
+        <span>{{ post.date | date_to_string }}</span>
     </li>
     {% endfor %}
 </ul>
 <script>
 (function() {
+    return;
     var posts = document.querySelectorAll('.posts li'),
         currently = document.querySelector('.current'),
         base = 35,

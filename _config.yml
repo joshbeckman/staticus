@@ -5,3 +5,8 @@ title: Narro Status
 description: The status page for the Narro API and services
 
 permalink: pretty
+
+# TODO: Build pagination into archive
+gems: [jekyll-paginate]
+paginate: 2
+paginate_path: '/archive/page:num/'

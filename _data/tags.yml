@@ -1,0 +1,8 @@
+- slug: apps
+  key: true
+  name: Apps and Runtime
+- slug: data
+  key: true
+  name: Data Services
+- slug: maintenance
+  name: Scheduled Maintenance
