@@ -20,7 +20,6 @@ title: Narro Status
             {{ tag.name }}
         </h3>
     </div>
-    <hr/>
     {% for post in site.tags[tag.slug] limit:1 %}
         <p class="{{ post.action }}">
             {% if post.action contains 'incident' %}
@@ -44,7 +43,11 @@ title: Narro Status
     </h3>
 </div>
 <hr/>
-<div class="uptime">
+<div class="uptime" style="display: none">
+    {% for post in site.posts limit:100 %}
+    <span class="{{ post.action }}" data-action="{{ post.action }}" data-url="{{ post.url }}" data-title="{{ post.title }}" data-date="{{ post.date | date_to_xmlschema }}">
+    </span>
+    {% endfor %}
 </div>
 
 <div class="index-heading">
@@ -70,23 +73,43 @@ title: Narro Status
 </ul>
 <script>
 (function() {
-    return;
-    var posts = document.querySelectorAll('.posts li'),
-        currently = document.querySelector('.current'),
-        base = 35,
-        n = new Date(),
-        o = new Date(posts[0].querySelector('span').textContent),
-        diff = (n.getTime() - o.getTime()) / (1000 * 60 * 60);
+    var wrapper = document.querySelector('.uptime'),
+        posts   = document.querySelectorAll('.uptime span'),
+        span    = false,
+        n       = new Date(),
+        o       = new Date(posts[0].dataset.date),
+        day     = (1000 * 60 * 60 * 24),
+        diff    = Math.floor((n.getTime() - o.getTime()) / day),
+        weekDay = 6 - n.getDay(),
+        i, j, k = 0;
 
-    posts[0].style.paddingTop = (base + diff) + 'px';
-    currently.className += ' ' + posts[0].className;
-    for (var i = 0; i < posts.length; i++) {
-        n = new Date(posts[i].querySelector('span').textContent);
-        o = posts[i + 1] ? new Date(posts[i + 1].querySelector('span').textContent) : null;
-        if (o) {
-            diff = (n.getTime() - o.getTime()) / (1000 * 60 * 60);
-            posts[i + 1].style.paddingTop = (base + diff) + 'px';
-        }
+    for (j = 0; j < diff; j++) {
+        span = document.createElement('span');
+        span.title = (new Date(o.getTime() + day * (diff - j))).toDateString();
+        setTimeout(wrapper.appendChild.bind(wrapper, span), k * 10);
+        k++;
     }
+    for (i = 0; i < posts.length; i++) {
+        span = document.createElement('span');
+        span.title = posts[i].dataset.title;
+        span.className = posts[i].dataset.action;
+        setTimeout(wrapper.appendChild.bind(wrapper, span), k * 10);
+        n = new Date(posts[i].dataset.date);
+        o = posts[i + 1] ?
+            new Date(posts[i + 1].dataset.date) :
+            null;
+        if (o) {
+            diff = Math.floor((n.getTime() - o.getTime()) / day);
+            for (j = 1; j < diff; j++) {
+                span = document.createElement('span');
+                span.title = (new Date(o.getTime() + day * (diff - j))).toDateString();
+                setTimeout(wrapper.appendChild.bind(wrapper, span), k * 10);
+                k++;
+            }
+        }
+        wrapper.removeChild(posts[i]);
+        k++;
+    }
+    wrapper.style.display = '';
 })();
 </script>

@@ -28,6 +28,35 @@ body {
     padding-left: 1rem;
 }
 
+.uptime > span {
+    display: inline-block;
+    width: 0.5rem;
+    height: 2rem;
+    margin: 0 1px;
+    background: lightgreen;
+    animation: fall .4s;
+}
+.uptime > span.resolved {
+    background: lightgreen;
+}
+.uptime > span.incident-warning {
+    background: orange;
+}
+.uptime > span.incident-error {
+    background: red;
+}
+.uptime > span:hover {
+    box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+}
+@keyframes fall{
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 article .tags {
     margin: 1rem 0;
 }
