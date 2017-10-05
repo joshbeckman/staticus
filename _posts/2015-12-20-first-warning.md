@@ -1,9 +1,8 @@
 ---
 layout: post
 title: First Warning
-action: warning
-system: Systems are error-prone
-date: 2015-12-20 21:12
+action: incident-warning
+date: 2017-09-20 21:12
 tags: [apps]
 ---
 

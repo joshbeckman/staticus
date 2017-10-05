@@ -3,8 +3,10 @@ author: NarroApp
 email: josh@narro.co
 title: Narro Status
 description: The status page for the Narro API and services
+homepage: https://www.narro.co
 
 permalink: pretty
+uptime_days: 60
 
 # TODO: Build pagination into archive
 gems: [jekyll-paginate]

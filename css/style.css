@@ -3,9 +3,13 @@ body {
     font-family: monospace;
     max-width: 40rem;
     margin: 1rem auto;
+    padding: 0 1rem;
 }
 
-.topright {
+.bottom {
+    margin: 2rem 0;
+}
+.topright, .bottomright {
     text-align: right;
 }
 
@@ -13,7 +17,10 @@ body {
     margin-top: 2rem;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
+}
+.index-heading h2 {
+    margin-bottom: 0.5rem;
 }
 .index-system .resolved {
     border-left: 0.5rem solid lightgreen;
@@ -28,21 +35,44 @@ body {
     padding-left: 1rem;
 }
 
+.uptime, .uptime-scale {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.uptime-scale > span {
+    flex: 1;
+}
+.uptime-scale > span:last-child {
+    text-align: right;
+}
 .uptime > span {
-    display: inline-block;
-    width: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
     height: 2rem;
     margin: 0 1px;
     background: lightgreen;
     animation: fall .4s;
 }
-.uptime > span.resolved {
+.uptime > span > a {
+    display: block;
+    width: 100%;
+    flex: 1;
+    animation: fall .4s;
+}
+.uptime  a.resolved {
     background: lightgreen;
 }
-.uptime > span.incident-warning {
+.uptime  a.resolve {
+    background: lightgreen;
+}
+.uptime  a.incident-warning {
     background: orange;
 }
-.uptime > span.incident-error {
+.uptime  a.incident-error {
     background: red;
 }
 .uptime > span:hover {
@@ -57,10 +87,16 @@ body {
   }
 }
 
-article .tags {
+.posts .post {
+    padding: 0 1rem 1rem;
+    margin: 1rem 0;
+    border: 1px solid lightgray;
+}
+
+.tags {
     margin: 1rem 0;
 }
-article .tags .tag {
+.tags .tag {
     display: inline-block;
     margin-right: 1rem;
     padding: 0.3rem 0.5rem;

@@ -8,18 +8,39 @@ title: Narro Status
         {{ site.title }}
     </a>
 </h1>
-<p class="current-text {{ site.posts.first.action }}">
-    {{ site.posts.first.system }}
-</p>
+{% for tag in site.data.tags %}
+{% if tag.scheduled %}
+<div class="posts">
+    {% for post in site.tags[tag.slug] limit:1 %}
+        <div class="post {{ post.action }}">
+            {% if post.action contains 'resolve' %}
+            {% else %}
+                <div class="tags">
+                    <span class="tag {{ tag.slug }}">
+                        {{ tag.name }}
+                    </span>
+                </div>
+                <h3>
+                    <a href="{{ post.url }}">
+                        {{ post.title }}
+                    </a>
+                </h3>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endfor %}
 
 {% for tag in site.data.tags %}
 {% if tag.key %}
 <div class="index-system">
     <div class="index-heading">
-        <h3>
+        <h2>
             {{ tag.name }}
-        </h3>
+        </h2>
     </div>
+    <hr/>
     {% for post in site.tags[tag.slug] limit:1 %}
         <p class="{{ post.action }}">
             {% if post.action contains 'incident' %}
@@ -38,9 +59,9 @@ title: Narro Status
 {% endfor %}
 
 <div class="index-heading">
-    <h3>
-        Uptime Last 30 Days
-    </h3>
+    <h2>
+        Uptime Last {{ site.uptime_days }} Days
+    </h2>
 </div>
 <hr/>
 <div class="uptime" style="display: none">
@@ -49,63 +70,66 @@ title: Narro Status
     </span>
     {% endfor %}
 </div>
+<div class="uptime-scale">
+    <span>
+        {{ site.uptime_days }} Days Ago
+    </span>
+    <span>
+        Latest
+    </span>
+</div>
 
 <div class="index-heading">
-    <h3>
+    <h2>
         Past Incidents
-    </h3>
+    </h2>
     <a href="/archive">
         View Archive
     </a>
 </div>
 <hr/>
-<ul id="posts"  class="posts">
+<div id="posts"  class="posts">
     {% for post in site.posts limit:3 %}
-    <li class="{{ post.action }}">
-        <h4>
+    <div class="post {{ post.action }}">
+        <h3>
             <a href="{{ post.url }}">
                 {{ post.title }}
             </a>
-        </h4>
+        </h3>
         <span>{{ post.date | date_to_string }}</span>
-    </li>
+    </div>
     {% endfor %}
-</ul>
+</div>
 <script>
 (function() {
     var wrapper = document.querySelector('.uptime'),
         posts   = document.querySelectorAll('.uptime span'),
         span    = false,
+        dayp    = false,
         n       = new Date(),
-        o       = new Date(posts[0].dataset.date),
         day     = (1000 * 60 * 60 * 24),
+        o       = new Date(n.getTime() - day * {{ site.uptime_days }}),
         diff    = Math.floor((n.getTime() - o.getTime()) / day),
-        weekDay = 6 - n.getDay(),
         i, j, k = 0;
 
-    for (j = 0; j < diff; j++) {
+    for (j = diff; j >= 0; j--) {
         span = document.createElement('span');
-        span.title = (new Date(o.getTime() + day * (diff - j))).toDateString();
-        setTimeout(wrapper.appendChild.bind(wrapper, span), k * 10);
+        n = (new Date(o.getTime() + day * (diff - j)));
+        span.title = n.toDateString();
+        span.setAttribute('data-date', n.toJSON().slice(0, 10));
+        wrapper.appendChild(span);
         k++;
     }
     for (i = 0; i < posts.length; i++) {
-        span = document.createElement('span');
-        span.title = posts[i].dataset.title;
+        span = document.createElement('a');
+        n = (new Date(posts[i].dataset.date));
+        span.title = n.toDateString();
+        span.title += ' ' + posts[i].dataset.title;
         span.className = posts[i].dataset.action;
-        setTimeout(wrapper.appendChild.bind(wrapper, span), k * 10);
-        n = new Date(posts[i].dataset.date);
-        o = posts[i + 1] ?
-            new Date(posts[i + 1].dataset.date) :
-            null;
-        if (o) {
-            diff = Math.floor((n.getTime() - o.getTime()) / day);
-            for (j = 1; j < diff; j++) {
-                span = document.createElement('span');
-                span.title = (new Date(o.getTime() + day * (diff - j))).toDateString();
-                setTimeout(wrapper.appendChild.bind(wrapper, span), k * 10);
-                k++;
-            }
+        span.href = posts[i].dataset.url;
+        dayp = wrapper.querySelector('[data-date="' + n.toJSON().slice(0, 10) + '"]');
+        if (dayp) {
+            setTimeout(dayp.appendChild.bind(dayp, span), k * 10);
         }
         wrapper.removeChild(posts[i]);
         k++;
