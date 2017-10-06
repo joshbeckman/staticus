@@ -58,13 +58,11 @@ body {
     height: 2rem;
     margin: 0 1px;
     background: lightgreen;
-    animation: fall .4s;
 }
 .uptime > span > a {
     display: block;
     width: 100%;
     flex: 1;
-    animation: fall .4s;
 }
 .uptime  a.resolved {
     background: lightgreen;
@@ -80,14 +78,6 @@ body {
 }
 .uptime > span:hover {
     box-shadow: 0 1px 1px rgba(0,0,0,0.2);
-}
-@keyframes fall{
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
 }
 
 .posts .post {
@@ -105,3 +95,6 @@ body {
     padding: 0.3rem 0.5rem;
     border: 1px solid;
 }
+
+/* Place custom styling below */
+

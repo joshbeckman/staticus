@@ -3,22 +3,22 @@ layout: default
 ---
 
 <meta name="twitter:card"       content="summary" />
-<meta name="twitter:site"       content="@narroapp" />
+<meta name="twitter:site"       content="@{{ site.author }}" />
 <meta name="twitter:title"      content="{{ page.title }}" />
 <meta name="twitter:description"content="{{ page.date | date_to_string }}" />
-<meta name="twitter:image"      content="https://status.narro.co/favicon.png" />
+<meta name="twitter:image"      content="{{ site.url }}/favicon.png" />
 <meta name="twitter:url"        content="{{ page.url }}" />
 <meta property="og:title"       content="{{ page.title }}" />
 <meta property="og:type"        content="article" />
 <meta property="og:url"         content="{{ page.url }}" />
-<meta property="og:image"       content="https://status.narro.co/favicon.png" />
-<meta property="og:site_name"   content="Narro Status" />
+<meta property="og:image"       content="{{ site.url }}/favicon.png" />
+<meta property="og:site_name"   content="{{ site.title }}" />
 
 <article itemscope itemtype="http://schema.org/BlogPosting">
     <meta itemprop="author" content="{{ site.author }}" />
     <p class="meta">
         <span itemprop="datePublished">
-            {{ page.date }}
+            Posted: {{ page.date }}
         </span>
     </p>
     <h1 class="">

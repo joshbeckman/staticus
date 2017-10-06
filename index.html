@@ -12,9 +12,9 @@ title: Narro Status
 {% if tag.scheduled %}
 <div class="posts">
     {% for post in site.tags[tag.slug] limit:1 %}
-        <div class="post {{ post.action }}">
-            {% if post.action contains 'resolve' %}
-            {% else %}
+        {% if post.action contains 'resolve' %}
+        {% else %}
+            <div class="post {{ post.action }}">
                 <div class="tags">
                     <span class="tag {{ tag.slug }}">
                         {{ tag.name }}
@@ -25,7 +25,8 @@ title: Narro Status
                         {{ post.title }}
                     </a>
                 </h3>
-            {% endif %}
+            </div>
+        {% endif %}
         </div>
     {% endfor %}
 </div>
@@ -44,13 +45,15 @@ title: Narro Status
     {% for post in site.tags[tag.slug] limit:1 %}
         <p class="{{ post.action }}">
             {% if post.action contains 'incident' %}
-                <a href="{{ post.url }}">
-                    {{ post.title }}
-                </a>
+                <h3 class="{{ post.action }}">
+                    <a href="{{ post.url }}">
+                        {{ post.title }}
+                    </a>
+                </h3>
             {% else %}
-                <span class="resolved">
+                <h3 class="resolved">
                     No known issues at this time.
-                </span>
+                </h3>
             {% endif %}
         </p>
     {% endfor %}
@@ -105,12 +108,13 @@ title: Narro Status
     var wrapper = document.querySelector('.uptime'),
         posts   = document.querySelectorAll('.uptime span'),
         span    = false,
+        a       = false,
         dayp    = false,
         n       = new Date(),
         day     = (1000 * 60 * 60 * 24),
         o       = new Date(n.getTime() - day * {{ site.uptime_days }}),
         diff    = Math.floor((n.getTime() - o.getTime()) / day),
-        i, j, k = 0;
+        i, j    = 0;
 
     for (j = diff; j >= 0; j--) {
         span = document.createElement('span');
@@ -118,21 +122,18 @@ title: Narro Status
         span.title = n.toDateString();
         span.setAttribute('data-date', n.toJSON().slice(0, 10));
         wrapper.appendChild(span);
-        k++;
     }
     for (i = 0; i < posts.length; i++) {
-        span = document.createElement('a');
+        a = document.createElement('a');
         n = (new Date(posts[i].dataset.date));
-        span.title = n.toDateString();
-        span.title += ' ' + posts[i].dataset.title;
-        span.className = posts[i].dataset.action;
-        span.href = posts[i].dataset.url;
+        a.title     = n.toDateString() + ' ' + posts[i].dataset.title;
+        a.className = posts[i].dataset.action;
+        a.href      = posts[i].dataset.url;
         dayp = wrapper.querySelector('[data-date="' + n.toJSON().slice(0, 10) + '"]');
         if (dayp) {
-            setTimeout(dayp.appendChild.bind(dayp, span), k * 10);
+            dayp.appendChild(a);
         }
         wrapper.removeChild(posts[i]);
-        k++;
     }
     wrapper.style.display = '';
 })();
