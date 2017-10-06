@@ -40,6 +40,9 @@ body {
     justify-content: space-between;
     align-items: center;
 }
+.uptime-scale {
+    margin-top: 0.5rem;
+}
 .uptime-scale > span {
     flex: 1;
 }
