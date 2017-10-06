@@ -1,7 +1,14 @@
 url: https://status.narro.co
 author: NarroApp
 email: josh@narro.co
-title: Narro Status
+title: Staticus
 description: The status page for the Narro API and services
+homepage: https://www.narro.co
 
 permalink: pretty
+uptime_days: 60
+
+# TODO: Build pagination into archive
+gems: [jekyll-paginate]
+paginate: 2
+paginate_path: '/archive/page:num/'

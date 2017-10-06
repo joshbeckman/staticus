@@ -3,25 +3,22 @@ layout: default
 ---
 
 <meta name="twitter:card"       content="summary" />
-<meta name="twitter:site"       content="@narroapp" />
+<meta name="twitter:site"       content="@{{ site.author }}" />
 <meta name="twitter:title"      content="{{ page.title }}" />
 <meta name="twitter:description"content="{{ page.date | date_to_string }}" />
-<meta name="twitter:image"      content="https://status.narro.co/favicon.png" />
+<meta name="twitter:image"      content="{{ site.url }}/favicon.png" />
 <meta name="twitter:url"        content="{{ page.url }}" />
 <meta property="og:title"       content="{{ page.title }}" />
 <meta property="og:type"        content="article" />
 <meta property="og:url"         content="{{ page.url }}" />
-<meta property="og:image"       content="https://status.narro.co/favicon.png" />
-<meta property="og:site_name"   content="Narro Status" />
+<meta property="og:image"       content="{{ site.url }}/favicon.png" />
+<meta property="og:site_name"   content="{{ site.title }}" />
 
 <article itemscope itemtype="http://schema.org/BlogPosting">
     <meta itemprop="author" content="{{ site.author }}" />
-    <h2 class="site-title">
-        <a rel="home" href="/" title="{{ site.title }}">Status</a>
-    </h2>
     <p class="meta">
         <span itemprop="datePublished">
-            {{ page.date }}
+            Posted: {{ page.date }}
         </span>
     </p>
     <h1 class="">
@@ -29,7 +26,31 @@ layout: default
             {{ page.title }}
         </a>
     </h1>
+    <div class="tags">
+        {% for post_tag in page.tags %}
+            {% for data_tag in site.data.tags %}
+                {% if data_tag.slug == post_tag %}
+                    {% assign tag = data_tag %}
+                {% endif %}
+            {% endfor %}
+            {% if tag %}
+                <span class="tag {{ tag.slug }}">
+                    {{ tag.name }}
+                </span>
+            {% else %}
+                <span class="tag {{ post_tag }}">
+                    {{ post_tag }}
+                </span>
+            {% endif %}
+        {% endfor %}
+    </div>
     <div class="content" itemprop="articleBody">
         {{ content }}
     </div>
+    <hr/>
+    <h4 class="site-title">
+        <a rel="home" href="/" title="{{ site.title }}">
+            &larr; {{ site.title }}
+        </a>
+    </h4>
 </article>

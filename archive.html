@@ -1,0 +1,17 @@
+---
+layout: default
+title: Archive
+---
+
+<h1 class="site-title">
+    <a href="/" title="{{ site.title }}">{{ site.title }}</a> Archive
+</h1>
+
+<div id="posts"  class="posts">
+    {% for post in site.posts %}
+    <div class="post {{ post.action }}">
+        <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+        <span>{{ post.date | date_to_string }}</span>
+    </div>
+    {% endfor %}
+</div>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-   <title>{{ page.title }}</title>
-   <meta name="author" content="{{ site.author }}" />
-   <link href="rss.xml" rel="alternate" title="{{ site.title }}" type="application/xml" />
-   <link rel="stylesheet" href="/css/style.min.css" type="text/css" media="screen, projection" />
+    <title>{{ page.title }}</title>
+    <meta name="author" content="{{ site.author }}" />
+    <link href="rss.xml" rel="alternate" title="{{ site.title }}" type="application/xml" />
+    <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen, projection" />
     <link rel="shortcut icon" href="/favicon.png" />
     <meta name="msapplication-TileColor" content="#ffffff" />
     <meta name="msapplication-TileImage" content="/favicon.png" />
@@ -17,19 +17,26 @@
 <body class="markdown-body">
     <div class="top">
         <div class="topright">
-            <small>
+            <p>
                 <a href="/rss.xml"
                     title="Subscribe to the RSS feed"
                     rel="alternate">RSS</a>
-            </small>
+            </p>
         </div>
-        <img class="logo"
-            alt="{{ site.title }}"
-            src="/logo.svg"
-            width=150 height=50 />
     </div>
 
     {{ content }}
 
+    <div class="bottom">
+        <div class="bottomright">
+            <p>
+                <a href="{{ site.homepage }}"
+                    title="Homepage"
+                    rel="alternate">
+                    Homepage
+                </a>
+            </p>
+        </div>
+    </div>
 </body>
 </html>
