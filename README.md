@@ -46,7 +46,14 @@ $ bundle install
 $ jekyll serve
 ```
 
-### Preview
+## Examples
+
+These sites are using Staticus:
+- https://status.narro.co
+- https://status.officeluv.com
+
+
+## Preview
 
 ![Screenshot](https://github.com/NarroApp/staticus/blob/master/img/screenshot.png)
 
