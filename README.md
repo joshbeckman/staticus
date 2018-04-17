@@ -1,5 +1,5 @@
 # Staticus
-A static status page, designed to be blazingly fast and quick enough to update.
+A static status page, designed to be blazingly fast and quick enough to update. [Demo][0]
 
 - Runs on GitHub pages (jekyll)
 - Supports multiple status channels (e.g. _Apps_ and _Data_)
@@ -46,6 +46,15 @@ $ bundle install
 $ jekyll serve
 ```
 
-### Preview
+## Examples
+
+These sites are using Staticus:
+- https://status.narro.co
+- https://status.officeluv.com
+
+
+## Preview
 
 ![Screenshot](https://github.com/NarroApp/staticus/blob/master/img/screenshot.png)
+
+[0]: https://staticus.narro.co
